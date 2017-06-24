@@ -101,11 +101,14 @@ var allSelectedImages = [];
 
 
 function handleClick(event) {
+    //it's 24 instead of 25 because the initial click was not part of or was not inside of the handleClick function
   if (click > 24){
+    //return; command ends the function.
     return;
+
   }
   click++;
-  /*event.preventDefault();*/
+
   ///target is the html element
   ///get the id of what I just clicked
   var selectedImageId = event.target.id;
@@ -144,8 +147,9 @@ function printSelections(){
   ulEl.appendChild(liEl);
 
   for(var i = 0; i < names.length; i++){
+
     var liEl = document.createElement('li');
-    liEl.textContent = names[i].clicked;
+    liEl.textContent = results;
     ulEl.appendChild(liEl);
 
     var results = names[i].clicked + ' votes for ' + names[i].name;
