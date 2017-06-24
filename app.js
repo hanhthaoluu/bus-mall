@@ -97,9 +97,14 @@ names[randomNumberThree].elementId = thirdImgEl.id;
 var show = 0;
 var click = 0;
 var allSelectedImages = [];
-while (click < 25){
+
+
 
 function handleClick(event) {
+  if (click > 24){
+    return;
+  }
+  click++;
   /*event.preventDefault();*/
   ///target is the html element
   ///get the id of what I just clicked
@@ -109,19 +114,14 @@ function handleClick(event) {
   for(var i = 0; i < names.length; i++){
     if(names[i].elementId === selectedImageId){
        names[i].clicked++;
+
     }
     console.log(names[i]);
     names[i].elementId = '';
   }
 
   console.log('This is what I clicked. The selectedImageId is ' + selectedImageId);
-  //var target = event.target.name;
 
-  /*allSelectedImages.push(selectedImage);
-  show ++;
-  console.log('number of show :' + show);
-  click ++;
-  console.log('number of click: ' + click);*/
   threeDifferentRandomNumbers();
 
   printSelections();
@@ -135,10 +135,8 @@ thirdImgEl.addEventListener('click', handleClick, false);
 
 
 
-var ulEl = document.getElementById('generated-list');
-
-
-function printSelections() {
+function printSelections(){
+  var ulEl = document.getElementById('generated-list');
   ulEl.textContent= '';
 
   var liEl = document.createElement('li');
