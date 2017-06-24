@@ -64,24 +64,50 @@ function randomIndex () {
   return Math.floor(Math.random() * (20-1)) + 1;
 }
 
-//now generate AND store 3 random numbers into 3 different variables
-var randomNumberOne = randomIndex();
-var randomNumberTwo = randomIndex();
-var randomNumberThree = randomIndex();
+///now generate AND store 3 random numbers into 3 different variables
 
-//now I need to make sure the 3 generated numbers are not the same bc I want 3 different images side by side
 
-//while any number of the 3 generated number is equal to each other, I need to regenerate all 3 random numbers to get new random numbers
-while ((randomNumberOne == randomNumberTwo)|| (randomNumberOne == randomNumberThree) || (randomNumberTwo == randomNumberThree)){
+///now I need to make sure the 3 generated numbers are not the same bc I want 3 different images side by side
+
+///while any number of the 3 generated number is equal to each other, I need to regenerate all 3 random numbers to get new random numbers
+function threeDifferentRandomNumbers(){
+
+  var randomNumberOne = randomIndex();
+  var randomNumberTwo = randomIndex();
+  var randomNumberThree = randomIndex();
+  while ((randomNumberOne == randomNumberTwo)|| (randomNumberOne == randomNumberThree) || (randomNumberTwo == randomNumberThree)){
   randomNumberOne = randomIndex();
   randomNumberTwo = randomIndex();
   randomNumberThree = randomIndex();
-}
-
-
-//test my dynamic image source with random index
+  }
+///test my dynamic image source with random index
 firstImgEl.src=names[randomNumberOne].path;
 secondImgEl.src = names[randomNumberTwo].path;
 thirdImgEl.src = names[randomNumberThree].path;
-
+}
 ///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images
+function handleClick(event){
+  /*event.preventDefault();*/
+  /*var selectedImage = event.target.names[].path;
+  console.log(selectedImage);
+  allSelectedImages.push(selectedImage);*/
+  show ++;
+  console.log('number of show :' + show);
+  click ++;
+  console.log('number of click: ' + click);
+  threeDifferentRandomNumbers();
+
+}
+
+firstImgEl.addEventListener('click', handleClick, false);
+secondImgEl.addEventListener('click', handleClick, false);
+thirdImgEl.addEventListener('click', handleClick, false);
+
+var show = 0;
+var click = 0;
+var allSelectedImages = [];
+
+if(click < 25){
+  handleClick(event);
+}
+///NEXT STEP:
