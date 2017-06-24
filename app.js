@@ -13,6 +13,7 @@ function Image(name, path) {
   this.shown = 0;
   this.clicked = 0;
   this.elementId = '';
+
 }
 /*
 var images = {
@@ -92,6 +93,12 @@ names[randomNumberThree].elementId = thirdImgEl.id;
 }
 ///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images
 //read chapter Events in the Jon Duckett textbook page 263 EVENT LISTENER WITH PARAMETERS
+
+var show = 0;
+var click = 0;
+var allSelectedImages = [];
+while (click < 25){
+
 function handleClick(event) {
   /*event.preventDefault();*/
   ///target is the html element
@@ -102,7 +109,6 @@ function handleClick(event) {
   for(var i = 0; i < names.length; i++){
     if(names[i].elementId === selectedImageId){
        names[i].clicked++;
-
     }
     console.log(names[i]);
     names[i].elementId = '';
@@ -118,21 +124,36 @@ function handleClick(event) {
   console.log('number of click: ' + click);*/
   threeDifferentRandomNumbers();
 
+  printSelections();
 }
 
-  threeDifferentRandomNumbers();
+threeDifferentRandomNumbers();
+
 firstImgEl.addEventListener('click', handleClick, false);
 secondImgEl.addEventListener('click', handleClick, false);
 thirdImgEl.addEventListener('click', handleClick, false);
 
-var show = 0;
-var click = 0;
-var allSelectedImages = [];
+
 
 var ulEl = document.getElementById('generated-list');
 
-var liEl = document.createElement('li')
-ulEl.appendChild(liEl);
-liEl.appendChild(names[i]);
+
+function printSelections() {
+  ulEl.textContent= '';
+
+  var liEl = document.createElement('li');
+  liEl.textContent = names.clicked;
+  ulEl.appendChild(liEl);
+
+  for(var i = 0; i < names.length; i++){
+    var liEl = document.createElement('li');
+    liEl.textContent = names[i].clicked;
+    ulEl.appendChild(liEl);
+
+    var results = names[i].clicked + ' votes for ' + names[i].name;
+    console.log(results);
+  }
+}
+
 
 ///NEXT STEP:
