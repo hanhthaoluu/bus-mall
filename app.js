@@ -12,6 +12,7 @@ function Image(name, path) {
   this.path = path;
   this.shown = 0;
   this.clicked = 0;
+  this.elementId = '';
 }
 /*
 var images = {
@@ -82,23 +83,44 @@ function threeDifferentRandomNumbers(){
   }
 ///test my dynamic image source with random index
 firstImgEl.src=names[randomNumberOne].path;
+names[randomNumberOne].elementId = firstImgEl.id;
+
 secondImgEl.src = names[randomNumberTwo].path;
+names[randomNumberTwo].elementId = secondImgEl.id;
 thirdImgEl.src = names[randomNumberThree].path;
+names[randomNumberThree].elementId = thirdImgEl.id;
 }
 ///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images
-function handleClick(event){
+//read chapter Events in the Jon Duckett textbook page 263 EVENT LISTENER WITH PARAMETERS
+function handleClick(event) {
   /*event.preventDefault();*/
-  /*var selectedImage = event.target.names[].path;
-  console.log(selectedImage);
-  allSelectedImages.push(selectedImage);*/
+  ///target is the html element
+  ///get the id of what I just clicked
+  var selectedImageId = event.target.id;
+  console.log(selectedImageId);
+
+  for(var i = 0; i < names.length; i++){
+    if(names[i].elementId === selectedImageId){
+       names[i].clicked++;
+
+    }
+    console.log(names[i]);
+    names[i].elementId = '';
+  }
+
+  console.log('This is what I clicked. The selectedImageId is ' + selectedImageId);
+  //var target = event.target.name;
+
+  /*allSelectedImages.push(selectedImage);
   show ++;
   console.log('number of show :' + show);
   click ++;
-  console.log('number of click: ' + click);
+  console.log('number of click: ' + click);*/
   threeDifferentRandomNumbers();
 
 }
 
+  threeDifferentRandomNumbers();
 firstImgEl.addEventListener('click', handleClick, false);
 secondImgEl.addEventListener('click', handleClick, false);
 thirdImgEl.addEventListener('click', handleClick, false);
@@ -107,7 +129,10 @@ var show = 0;
 var click = 0;
 var allSelectedImages = [];
 
-if(click < 25){
-  handleClick(event);
-}
+var ulEl = document.getElementById('generated-list');
+
+var liEl = document.createElement('li')
+ulEl.appendChild(liEl);
+liEl.appendChild(names[i]);
+
 ///NEXT STEP:
