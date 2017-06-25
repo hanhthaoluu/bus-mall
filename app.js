@@ -60,10 +60,10 @@ firstImgEl.src=names[9].path;
 */
 
 
-///I need to generate 3 different random numbers between 1 and 20;
+///I need to generate 3 different random numbers between 0 and 20;
 //FRIST: GENERATE A RANDOM NUMBER FUNCTION
 function randomIndex () {
-  return Math.floor(Math.random() * (20-1)) + 1;
+  return Math.floor((Math.random() * 20));
 }
 
 ///now generate AND store 3 random numbers into 3 different variables
@@ -84,19 +84,23 @@ function threeDifferentRandomNumbers(){
   }
 ///test my dynamic image source with random index
 firstImgEl.src=names[randomNumberOne].path;
+names[randomNumberOne].shown++;
 names[randomNumberOne].elementId = firstImgEl.id;
 
 secondImgEl.src = names[randomNumberTwo].path;
+names[randomNumberTwo].shown++;
 names[randomNumberTwo].elementId = secondImgEl.id;
+
 thirdImgEl.src = names[randomNumberThree].path;
+names[randomNumberThree].shown++;
 names[randomNumberThree].elementId = thirdImgEl.id;
 }
 ///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images
 //read chapter Events in the Jon Duckett textbook page 263 EVENT LISTENER WITH PARAMETERS
 
-var show = 0;
+
 var click = 0;
-var allSelectedImages = [];
+
 
 
 
@@ -109,6 +113,7 @@ function handleClick(event) {
   }
   click++;
 
+
   ///target is the html element
   ///get the id of what I just clicked
   var selectedImageId = event.target.id;
@@ -117,8 +122,9 @@ function handleClick(event) {
   for(var i = 0; i < names.length; i++){
     if(names[i].elementId === selectedImageId){
        names[i].clicked++;
-
+      //  names[i].shown++;
     }
+
     console.log(names[i]);
     names[i].elementId = '';
   }
@@ -152,10 +158,26 @@ function printSelections(){
     liEl.textContent = results;
     ulEl.appendChild(liEl);
 
-    var results = names[i].clicked + ' votes for ' + names[i].name;
+    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + Math.ceil((names[i].clicked/names[i].shown)*100) + '%';
+
+
+    /*function(){
+      if (names[i].shown !== 0){
+        Math.ceil((names[i].clicked/names[i].shown)*100);
+      } else {
+        ///say this image was not shown at all
+      }
+      */
+
+    var results = names[i].clicked + ' votes for ' + names[i].name + '.' + percentageItemClicked + '.';
     console.log(results);
   }
+
+
+
 }
+
+
 
 
 ///NEXT STEP:
