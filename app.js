@@ -13,7 +13,6 @@ function Image(name, path) {
   this.shown = 0;
   this.clicked = 0;
   this.elementId = '';
-
 }
 /*
 var images = {
@@ -158,17 +157,16 @@ function printSelections(){
     liEl.textContent = results;
     ulEl.appendChild(liEl);
 
-    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + Math.ceil((names[i].clicked/names[i].shown)*100) + '%';
 
 
-    /*function(){
+    var percentage = 0;
+
       if (names[i].shown !== 0){
-        Math.ceil((names[i].clicked/names[i].shown)*100);
-      } else {
-        ///say this image was not shown at all
+        percentage = Math.ceil((names[i].clicked/names[i].shown)*100);
       }
-      */
 
+    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + percentage + '%';
+    
     var results = names[i].clicked + ' votes for ' + names[i].name + '.' + percentageItemClicked + '.';
     console.log(results);
   }
