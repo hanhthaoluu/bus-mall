@@ -14,12 +14,6 @@ function Image(name, path) {
   this.clicked = 0;
   this.elementId = '';
 }
-/*
-var images = {
-  new Image();
-  new Image();
-}
-*/
 
 ///create new instances of Image
 var bag = new Image('bag', './assets/bag.jpg');
@@ -66,37 +60,46 @@ function randomIndex () {
 }
 ///now generate AND store 3 random numbers into 3 different variables
 ///now I need to make sure the 3 generated numbers are not the same bc I want 3 different images side by side
-///while any number of the 3 generated number is equal to each other, I need to regenerate all 3 random numbers to get new random numbers
 function threeDifferentRandomNumbers(){
 
   var randomNumberOne = randomIndex();
+
   var randomNumberTwo = randomIndex();
   var randomNumberThree = randomIndex();
 ///make sure the 3 generated numbers are not the same bc I want 3 different images side by side
+///while any number of the 3 generated number is equal to each other, I need to regenerate all 3 random numbers to get new random numbers
   while ((randomNumberOne == randomNumberTwo)|| (randomNumberOne == randomNumberThree) || (randomNumberTwo == randomNumberThree)){
-  randomNumberOne = randomIndex();
-  randomNumberTwo = randomIndex();
-  randomNumberThree = randomIndex();
+    randomNumberOne = randomIndex();
+    randomNumberTwo = randomIndex();
+    randomNumberThree = randomIndex();
+
+    console.log(randomNumberOne, randomNumberTwo, randomNumberThree);
   }
+
+  return ([randomNumberOne, randomNumberTwo, randomNumberThree]);
+  //return this array
+}
+
 ///test my dynamic image source with random index
 ///think of ImgEl as a picture frame. Currently there are 3 empty picture frames. Every round I take 3 pictures out and insert 3 new pictures in. Which pictures get inserted is determined by randomization/randomIndex
-firstImgEl.src=images[randomNumberOne].path;
-//the SOURCE of an image is the PATH to that image
-images[randomNumberOne].shown++;
-///everytime an image is shown, mark it as being shown with ++; ++ means incrementing with 1 check
-images[randomNumberOne].elementId = firstImgEl.id;
-///this randomized
 
-secondImgEl.src = images[randomNumberTwo].path;
-images[randomNumberTwo].shown++;
-images[randomNumberTwo].elementId = secondImgEl.id;
+function displayThreeImages(randomNumbers){
+  firstImgEl.src=images[randomNumbers[0]].path;
+  //the SOURCE of an image is the PATH to that image
+  images[randomNumbers[0]].shown++;
+  ///everytime an image is shown, mark it as being shown with ++; ++ means incrementing with 1 check
+  images[randomNumbers[0]].elementId = firstImgEl.id;
+  ///this randomized
 
-thirdImgEl.src = images[randomNumberThree].path;
-images[randomNumberThree].shown++;
-images[randomNumberThree].elementId = thirdImgEl.id;
+  secondImgEl.src = images[randomNumbers[1]].path;
+  images[randomNumbers[1]].shown++;
+  images[randomNumbers[1]].elementId = secondImgEl.id;
 
+  thirdImgEl.src = images[randomNumbers[2]].path;
+  images[randomNumbers[2]].shown++;
+  images[randomNumbers[2]].elementId = thirdImgEl.id;
 }
-///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images
+
 //read chapter Events in the Jon Duckett textbook
 
 //According to the design of the research, the user is to click 25 times. So I need to keep track the number of clicks by declaring the var click.
@@ -108,6 +111,7 @@ function handleClick(event) {
     //it's 24 instead of 25 because the initial click, which is the EVENT that triggers the handleClick function, was not part of or was not inside of the handleClick function
   if (click > 24){
     //return; this command ends the handleClick function.
+    printSelections();
     return;
   }
   //as soon as the user clicks, keep track of the number of click right away by incrementing with click++
@@ -128,22 +132,33 @@ function handleClick(event) {
     ///let's say images[randomNumberThree].elementId = (is currently equal to) thirdImgEl.id;
     //the empty string is to take out the current picture off the picture frame/wiping out the current 3 pictures, so the new 3 pictures can be placed into the picture frames; placing the old picture back into the array pool
   }
-
   console.log('This is what I clicked. The selectedImageId is ' + selectedImageId);
 ///console.log this step is very important to make sure the codes are doing what you want
-  threeDifferentRandomNumbers();
 
-  printSelections();
+///NEXT STEP:  when I click on an image, it needs to regenerate 3 different images. So I need to get 3 new different random numbers.
+  var newRandomNumbers = threeDifferentRandomNumbers();
+//////old random numbers(imageIndexesToDisplay) CANNOT equal to the new random numbers(newRandomNumbers) SO DO THIS WHILE LOOP. So if they are equal then regenerate to get newRandomNumbers
+  while( (newRandomNumbers[0]===imageIndexesToDisplay[0]) || (newRandomNumbers[0]===imageIndexesToDisplay[1]) || (newRandomNumbers[0]===imageIndexesToDisplay[2]) || (newRandomNumbers[1]===imageIndexesToDisplay[0])  || (newRandomNumbers[1]===imageIndexesToDisplay[1]) || (newRandomNumbers[1]===imageIndexesToDisplay[2]) ||
+  (newRandomNumbers[2]===imageIndexesToDisplay[0]) || (newRandomNumbers[2]===imageIndexesToDisplay[1]) || (newRandomNumbers[2]===imageIndexesToDisplay[2]) ) {
+    newRandomNumbers = threeDifferentRandomNumbers();
+  }
+/////to update/replace the old random numbers(imageIndexesToDisplay) set imageIndexesToDisplay = newRandomNumbers
+  imageIndexesToDisplay = newRandomNumbers;/////this step is extremely important. I need to update the 3 newRandomNumbers to display new images so that
+  displayThreeImages(imageIndexesToDisplay);
 }
 
-threeDifferentRandomNumbers();
+
+//////don't change this first displayed images ever!!!!!!!!!!!!
+//////don't change these 2 lines of codes below (var imageIndexesToDisplay = threeDifferentRandomNumbers(); displayThreeImages(imageIndexesToDisplay);) because I need to keep track of them as generating the old random numbers.  I need to compare these old random numbers to new random numbers to make sure they are not equal to each other
+////these three random images are being displayed before the user clicks on any one image to trigger the handleClick function
+var imageIndexesToDisplay = threeDifferentRandomNumbers();
+displayThreeImages(imageIndexesToDisplay);
 
 firstImgEl.addEventListener('click', handleClick, false);
 secondImgEl.addEventListener('click', handleClick, false);
 thirdImgEl.addEventListener('click', handleClick, false);
 
-
-
+///this printSelections function is ONLY being called after the user made 25 clicks and is called inside the handleClick function
 function printSelections(){
   var ulEl = document.getElementById('generated-list');
   ulEl.textContent= '';
@@ -158,25 +173,15 @@ function printSelections(){
     liEl.textContent = results;
     ulEl.appendChild(liEl);
 
-
-
-    var percentage = 0;
+    var percentage = 'not shown yet';
 
       if (images[i].shown !== 0){
-        percentage = Math.ceil((images[i].clicked/images[i].shown)*100);
+        percentage = Math.ceil((images[i].clicked/images[i].shown)*100) + '%';
       }
 
-    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + percentage + '%';
+    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + percentage;
 
     var results = images[i].clicked + ' votes for ' + images[i].name + '.' + percentageItemClicked + '.';
     console.log(results);
   }
-
-
-
 }
-
-
-
-
-///NEXT STEP:

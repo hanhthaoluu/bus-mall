@@ -1,7 +1,34 @@
+
+
+
 body {
   background-color: beige;
+  font-family: 'Spectral', serif;
+}
+
+h1 {
+  font-family: 'Droid Serif', serif;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+#thank-you {
+  font-style: cursive;
 }
 
 img {
    width: 400px;
+   height: 400px;
  }
+
+#directions {
+  border-width: thick;
+  border-style: groove;
+  margin-bottom: 50px;
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: Arial;
+  line-height: 30px;
+}
