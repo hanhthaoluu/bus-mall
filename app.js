@@ -110,6 +110,7 @@ function handleClick(event) {
     //when the user makes the 26th click, no more images will be shown, halting the handleClick function
     //it's 24 instead of 25 because the initial click, which is the EVENT that triggers the handleClick function, was not part of or was not inside of the handleClick function
   if (click > 24){
+    alert('You are done with this survey. Click "ok". Then scroll down to see the complete list of products and your votes for each product. Thank you for completing this survey! Have a nice day!')
     //return; this command ends the handleClick function.
     printSelections();
     return;
