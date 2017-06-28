@@ -175,7 +175,7 @@ function printSelections(){
 
   var dataSet = [];
   var itemNames = [];
-  var chartColors= ['blue', 'yellow', 'silver', 'brown', 'red', 'pink', 'black', 'orange', 'peach', 'red', 'green', 'indigo', 'blue', 'white', 'indigo', 'red', 'orange', 'green', 'yellow'];
+  var chartColors= ['blue', 'yellow', 'silver', 'brown', 'red', 'pink', 'black', 'orange', 'yellow', 'red', 'green', 'indigo', 'blue', 'white', 'indigo', 'red', 'orange', 'green', 'yellow', 'pink'];
 
 
   for(var i = 0; i < images.length; i++){
