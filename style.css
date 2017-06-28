@@ -32,3 +32,8 @@ img {
   font-family: Arial;
   line-height: 30px;
 }
+
+#chart-div {
+  width: 60%;
+  min-width: 500px;
+}

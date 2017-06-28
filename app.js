@@ -37,7 +37,7 @@ var usb = new Image('usb', './assets/usb.gif');
 var waterCan = new Image('water-can', './assets/water-can.jpg');
 var wineGlass = new Image('wine-glass', './assets/wine-glass.jpg');
 
-//store all images in an array labeled as "images"
+//store all images objects in an array labeled as "images"
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
 /*////with trials and errors this is how I manage to change the source of an image
@@ -149,7 +149,7 @@ function handleClick(event) {
 }
 
 
-//////don't change this first displayed images ever!!!!!!!!!!!!
+//////don't change the var name of imageIndexesToDisplay!!!!!!!!!
 //////don't change these 2 lines of codes below (var imageIndexesToDisplay = threeDifferentRandomNumbers(); displayThreeImages(imageIndexesToDisplay);) because I need to keep track of them as generating the old random numbers.  I need to compare these old random numbers to new random numbers to make sure they are not equal to each other
 ////these three random images are being displayed before the user clicks on any one image to trigger the handleClick function
 var imageIndexesToDisplay = threeDifferentRandomNumbers();
@@ -168,6 +168,16 @@ function printSelections(){
   liEl.textContent = images.clicked;
   ulEl.appendChild(liEl);
 
+  //BAR GRAPH FOR THE VOTES
+  document.getElementById('votes-bar-graph').width = 50;
+
+  var context = document.getElementById('votes-bar-graph').getContext('2d');
+
+  var dataSet = [];
+  var itemNames = [];
+  var chartColors= ['blue', 'yellow', 'silver', 'brown', 'red', 'pink', 'black', 'orange', 'peach', 'red', 'green', 'indigo', 'blue', 'white', 'indigo', 'red', 'orange', 'green', 'yellow'];
+
+
   for(var i = 0; i < images.length; i++){
 
     var liEl = document.createElement('li');
@@ -184,5 +194,35 @@ function printSelections(){
 
     var results = images[i].clicked + ' votes for ' + images[i].name + '.' + percentageItemClicked + '.';
     console.log(results);
+
+    //for the BAR GRAPH save the images.clicked into a variable named votes then push the variable votes into the dataSet array
+    var votes = images[i].clicked;
+    dataSet.push(votes);
+    //FOR THE BAR GRAPH save the images[i].name into a variable called product then push the product into the var itemNames in the chart constructor below
+    var product = images[i].name;
+    itemNames.push(product);
   }
+
+
+  var votesBarGraph = new Chart(context, {
+    type: 'bar',
+    data: {
+      labels: itemNames,
+      datasets: [{
+        label: '# of Votes',
+        data: dataSet,
+        backgroundColor: chartColors
+      }]
+     },
+     options:{
+       scales: {
+         yAxes: [{
+           ticks:{
+             beginAtZero: true
+           }
+         }]
+       }
+     }
+  });
+
 }

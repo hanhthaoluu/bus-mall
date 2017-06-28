@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   </head>
   <body>
   <h1>HELLO THERE! Since you are stuck on this bus for another hour anyway, this catalog will definitely entertain you! Innovative products that will blow you away! You will be the first to see them.</h1>
@@ -25,8 +25,12 @@
     <img src="./assets/banana.jpg" class="medium" id="second-image">
     <img src="./assets/bathroom.jpg" class="medium" id="third-image">
 
-
     <ul id="generated-list"></ul>
+
+    <div id="chart-div">
+        <canvas id="votes-bar-graph"></canvas>
+    </div>
+
     <script src="app.js"></script>
   </body>
 
