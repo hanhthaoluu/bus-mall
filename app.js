@@ -1,5 +1,9 @@
 'use strict';
 
+var user = prompt('Hello there! What is your name?');
+var takeSurvey = alert ('HELLO ' + user + '! Since you are stuck on this bus for another hour anyway, this catalog will definitely entertain you! Innovative products that will blow you away! You will be the first to see them. Take this interesting BUS-MALL SURVEY. It only takes few minutes to complete. Are you ready to take the survey?'
+);
+
 ///get three img tags from the DOM tree to manipulate them
 var firstImgEl = document.getElementById('first-image');
 console.log(firstImgEl.src);
@@ -14,6 +18,7 @@ function Image(name, path) {
   this.clicked = 0;
   this.elementId = '';
 }
+
 
 ///create new instances of Image
 var bag = new Image('bag', './assets/bag.jpg');
@@ -115,6 +120,7 @@ function handleClick(event) {
     printSelections();
     return;
   }
+
   //as soon as the user clicks, keep track of the number of click right away by incrementing with click++
   click++;
   ///target is the html element
@@ -152,6 +158,8 @@ function handleClick(event) {
 //////don't change the var name of imageIndexesToDisplay!!!!!!!!!
 //////don't change these 2 lines of codes below (var imageIndexesToDisplay = threeDifferentRandomNumbers(); displayThreeImages(imageIndexesToDisplay);) because I need to keep track of them as generating the old random numbers.  I need to compare these old random numbers to new random numbers to make sure they are not equal to each other
 ////these three random images are being displayed before the user clicks on any one image to trigger the handleClick function
+
+
 var imageIndexesToDisplay = threeDifferentRandomNumbers();
 displayThreeImages(imageIndexesToDisplay);
 
@@ -226,3 +234,39 @@ function printSelections(){
   });
 
 }
+
+//javascript object notation
+//JSON.parse() can parse any objects, not just object literal
+//local storage is an empty object. It can only store strings.
+//local storage is unique to each page
+
+
+//persist to local storage
+//array of stats
+//stats is just a parameter, it's defined for the first time at the function line;
+
+
+//if localStorage.clicks exist then stringify them
+
+/*
+if (localStorage.clicks) {
+var stringifiedData = localStorage.clicks;
+console.log(stringifiedData);
+
+//redefine the var dataSet after clear()
+var dataSet = JSON.parse(stringifiedData);
+//if localStorage does not exist then use these data
+} else {
+  dataSet = [1, 2, 3, 4, 5];
+}
+
+//inside handleClick
+saveStatsToLocalStorage(dataSet);
+
+function saveStatsToLocalStorage(stats){
+  var statsString = JSON.stringify(stats);
+  console.log(statsString);
+  //save the stringified version of the stat array as clicks
+  localStorage.clicks = statsString;
+}
+*/

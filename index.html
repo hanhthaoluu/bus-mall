@@ -9,9 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   </head>
   <body>
-  <h1>HELLO THERE! Since you are stuck on this bus for another hour anyway, this catalog will definitely entertain you! Innovative products that will blow you away! You will be the first to see them.</h1>
-  <h2>Take this interesting BUS-MALL SURVEY.</h2>
-  <h3>It only takes few minutes to complete.</h3>
+    <div id="title">
+      <h1>BUS-MALL SURVEY</h1>
+    </div>
+
   <div id="directions">
     <ol id="survey-directions">DIRECTIONS
       <li>Below are 3 images of our innovative products, select the product that you are mostly to buy by clicking on that one image.</li>
@@ -21,16 +22,17 @@
     </ol>
   </div>
 
+  <div id="images">
     <img src="./assets/bag.jpg" class="medium" id="first-image">
     <img src="./assets/banana.jpg" class="medium" id="second-image">
     <img src="./assets/bathroom.jpg" class="medium" id="third-image">
-
+  </div>
     <ul id="generated-list"></ul>
 
     <div id="chart-div">
         <canvas id="votes-bar-graph"></canvas>
     </div>
-
+    
     <script src="app.js"></script>
   </body>
 

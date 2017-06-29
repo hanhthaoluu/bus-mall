@@ -2,16 +2,25 @@
 
 
 body {
-  background-color: beige;
+
   font-family: 'Spectral', serif;
   width: 100%;
   height: 100%;
+  background-color: #D9F2FF;
+
+}
+
+#title {
+  background-color: #97A7C2;
+  width: 100%;
+  padding: 5%;
 }
 
 h1 {
-  margin: 2%;
+  margin: 1%;
   width: 90%;
-  height: 15%;
+  height: 8%;
+  font-size: 40px;
   font-family: Times, serif;
   text-align: center;
 }
@@ -30,19 +39,31 @@ h2, h3 {
 }
 
 img {
-   width: 28%;
+   width: 30%;
    height: 30%;
-   margin: 1%;
-   margin-left: 3%;
+   margin: 3%;
+   margin-left: 4%;
    border: 2px black solid;
  }
+
+ #images {
+   width: 100%;
+   height: 50%;
+ }
+
+#first-image, #second-image, #third-image {
+  width: 400px;
+  height: 350px;
+}
 
 #directions {
   width: 85%;
   height: 25%;
   margin: 2%;
   margin-left: 6%;
-  border-color: blue;
+
+  background-color: #FFA64C;
+  border-color: black;
   border-width: thick;
   border-style: groove;
   margin-bottom: 50px;
@@ -54,13 +75,29 @@ img {
 
 #generated-list {
   margin: 10%;
+  background-color: #2B70A5;
 }
 
 #chart-div {
-  margin: 4%;
+  margin: 2.5%;
   width: 90%;
   height: 40%;
-  min-width: 50%;
+  min-width: 500px;
   border: 2px silver groove;
   padding: 2%;
 }
+/*
+.animation-box{
+  width: 400px;
+  height: 400px;
+  background: green;
+  transition: background 1.0s linear, border-radius 5s ease-in, width 2s ease-in-out;
+
+}
+
+.animation-box:hover{
+  width: 1000px;
+  background: red;
+  border-radius: 50%;
+}
+*/
