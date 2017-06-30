@@ -41,14 +41,15 @@ h2, h3 {
 img {
    width: 30%;
    height: 30%;
-   margin: 3%;
-   margin-left: 4%;
+   margin: 2%;
+   margin-left: 3%;
    border: 2px black solid;
  }
 
  #images {
    width: 100%;
    height: 50%;
+   margin-left: 9%;
  }
 
 #first-image, #second-image, #third-image {
@@ -57,10 +58,11 @@ img {
 }
 
 #directions {
-  width: 85%;
+  width: 70%;
   height: 25%;
   margin: 2%;
-  margin-left: 6%;
+  margin-left: 15%;
+  margin-right: 10%;
 
   background-color: #FFA64C;
   border-color: black;
