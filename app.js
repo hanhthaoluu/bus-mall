@@ -44,20 +44,19 @@ var wineGlass = new Image('wine-glass', './assets/wine-glass.jpg');
 //declare images
 var images;
 
+
+images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
+
+var resultsPreviousRound;
+console.log('')
+
 if (localStorage.images) {
-  var stringifiedData = localStorage.images;
-  console.log('There are stored data ' + stringifiedData);
+    var stringifiedData = localStorage.images;
+    console.log('There are stored data ' + stringifiedData);
 
-  images = JSON.parse(stringifiedData);
+    images = JSON.parse(stringifiedData);
+  }
 
-
-} else {
-  //store all images objects in an array labeled as "images"
-  images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-
-  console.log('There are no data stored in localStorage. Got into the else statement');
-
-}
 
 /*////with trials and errors this is how I manage to change the source of an image
 //I googled how to change the source of an image using js and I found something similar like this
@@ -127,26 +126,34 @@ function displayThreeImages(randomNumbers){
 //According to the design of the research, the user is to click 25 times. So I need to keep track the number of clicks by declaring the var click.
 //At the beginning, the user has not clicked on any images yet, so var click = 0.
 var click = 0;
+
+/*
 if (localStorage.numberOfClicks){
   click = JSON.parse(localStorage.numberOfClicks);
 }
+*/
+
 //when the user makes the first click (click is the set event) then the handleClick function is triggered or called.
 function handleClick(event) {
 
     //as soon as the user clicks, keep track of the number of click right away by incrementing with click++
   click++;
+
+
   console.log('I have clicked ' + click + 'times.');
     //when the user makes the 26th click, no more images will be shown, halting the handleClick function
-    //it's 24 instead of 25 because the initial click, which is the EVENT that triggers the handleClick function, was not part of or was not inside of the handleClick function
   if (click > 25){
     alert('You are done with this survey. Click "ok". Then scroll down to see the complete list of products and your votes for each product. Thank you for completing this survey! Have a nice day!')
     //return; this command ends the handleClick function.
     printSelections();
+
+    saveStatsToLocalStorage(images);
+
+    console.log('Saved into localStorage ' + saveStatsToLocalStorage);
+
     return;
   }
 
-  saveStatsToLocalStorage(images, click);
-  console.log('Saved into localStorage ' + saveStatsToLocalStorage);
   ///target is the html element
   ///get the id of what I just clicked
   var selectedImageId = event.target.id;
@@ -214,6 +221,10 @@ function printSelections(){
 
     var percentage = 'not shown yet';
 
+    //GET TOP 5 PERCENTAGE FOR THE PIE CHART
+    //if (percentage > )
+    //data.push(percentage)
+
       if (images[i].shown !== 0){
         percentage = Math.ceil((images[i].clicked/images[i].shown)*100) + '%';
       }
@@ -257,6 +268,14 @@ function printSelections(){
      }
   });
 
+/*
+  var pieChart = new Chart(ctx,{
+    type: 'pie',
+    data: data,
+    options: options
+});
+*/
+
 }
 
 //javascript object notation
@@ -264,18 +283,10 @@ function printSelections(){
 //local storage is an empty object. It can only store strings.
 //local storage is unique to each page
 
-//Function saves stats to the local storage
-// there are two inputs or parameters:
-// stats - this is my image data.  Its an array of Image objects
-// rounds - this is the number of clicks.  It is an integer
 
-//saveStatestoLocalStorage(stats=images, rounds=click)
+//saveStatestoLocalStorage(stats=images)
 
-function saveStatsToLocalStorage(stats, rounds){
+function saveStatsToLocalStorage(stats){
   var statsString = JSON.stringify(stats);
-  var clicks = JSON.stringify(rounds);
-  console.log('This is where I left off ' + statsString);
-  //save the stringified version of the stat array as clicks
   localStorage.images = statsString;
-  localStorage.numberOfClicks = clicks;
 }
