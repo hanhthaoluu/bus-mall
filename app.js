@@ -16,6 +16,7 @@ function Image(name, path) {
   this.path = path;
   this.shown = 0;
   this.clicked = 0;
+  this.percentageClicked = 0;
   this.elementId = '';
 }
 
@@ -144,13 +145,13 @@ function handleClick(event) {
     //when the user makes the 26th click, no more images will be shown, halting the handleClick function
   if (click > 25){
     alert('You are done with this survey. Click "ok". Then scroll down to see the complete list of products and your votes for each product. Thank you for completing this survey! Have a nice day!')
-    //return; this command ends the handleClick function.
+
     printSelections();
 
     saveStatsToLocalStorage(images);
 
     console.log('Saved into localStorage ' + saveStatsToLocalStorage);
-
+    //return; this command ends the handleClick function.
     return;
   }
 
@@ -210,28 +211,32 @@ function printSelections(){
   //BAR GRAPH FOR THE VOTES
   document.getElementById('votes-bar-graph').width = 50;
 
-  var context = document.getElementById('votes-bar-graph').getContext('2d');
+  var context1 = document.getElementById('votes-bar-graph').getContext('2d');
 
   var dataSet = [];
   var itemNames = [];
   var chartColors= ['blue', 'yellow', 'silver', 'brown', 'red', 'pink', 'black', 'orange', 'yellow', 'red', 'green', 'indigo', 'blue', 'white', 'indigo', 'red', 'orange', 'green', 'yellow', 'pink'];
 
+//////////////////PIE GRAPH FOR THE PERCENTAGE clicked
+  document.getElementById('percentage-clicked-pie-chart').width = 50;
+
+  var context2 = document.getElementById('percentage-clicked-pie-chart').getContext('2d');
+  console.log(context2);
+  var data = [];
+
 
   for(var i = 0; i < images.length; i++){
 
-    var percentage = 'not shown yet';
 
     //GET TOP 5 PERCENTAGE FOR THE PIE CHART
     //if (percentage > )
     //data.push(percentage)
 
-      if (images[i].shown !== 0){
-        percentage = Math.ceil((images[i].clicked/images[i].shown)*100) + '%';
-      }
+    if (images[i].shown !== 0){
+        images[i].percentageClicked = Math.ceil((images[i].clicked/images[i].shown)*100);
+    }
 
-    var percentageItemClicked = ' The percentage of times that an item was clicked when it was shown: ' + percentage;
-
-    var results = images[i].clicked + ' votes for ' + images[i].name + '.' + percentageItemClicked + '.';
+    var results = images[i].clicked + ' votes for ' + images[i].name + '. The percentage of times that an item was clicked when it was shown: ' + images[i].percentageClicked + '%.';
     console.log(results);
 
     var liEl = document.createElement('li');
@@ -244,10 +249,15 @@ function printSelections(){
     //FOR THE BAR GRAPH save the images[i].name into a variable called product then push the product into the var itemNames in the chart constructor below
     var product = images[i].name;
     itemNames.push(product);
+
+//////////////////PIE GRAPH FOR THE PERCENTAGE clicked
+
+    data.push(images[i].percentageClicked);
+
   }
 
 
-  var votesBarGraph = new Chart(context, {
+  var votesBarGraph = new Chart(context1, {
     type: 'bar',
     data: {
       labels: itemNames,
@@ -268,14 +278,23 @@ function printSelections(){
      }
   });
 
-/*
-  var pieChart = new Chart(ctx,{
+  console.log('HI!!!! Data = ' + data);
+  console.log('hi again!!!!!!!!! labels = ' + itemNames);
+  console.log('CONTEXT2 FOR LIFEEEEEEE = ' + context2);
+  var pieChart = new Chart(context2,{
     type: 'pie',
-    data: data,
-    options: options
-});
-*/
+    data: {
+      labels: itemNames,
+      datasets: [{
 
+        data: data,
+        backgroundColor: chartColors
+       }]
+    },
+    options: {
+      label: '% clicked when shown',
+    }
+  });
 }
 
 //javascript object notation

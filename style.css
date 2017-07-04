@@ -11,14 +11,18 @@ body {
 }
 
 #title {
-  background-color: #97A7C2;
+
   width: 100%;
+  background: #97A7C2;
   padding: 5%;
+  text-align: center;
+
 }
 
+
 h1 {
-  margin: 1%;
-  width: 90%;
+  margin: auto;
+  width: 100%;
   height: 8%;
   font-size: 40px;
   font-family: Times, serif;
@@ -60,9 +64,8 @@ img {
 #directions {
   width: 70%;
   height: 25%;
-  margin: 2%;
-  margin-left: 15%;
-  margin-right: 10%;
+  margin: auto;
+
 
   background-color: #FFA64C;
   border-color: black;
@@ -80,7 +83,7 @@ img {
   background-color: #2B70A5;
 }
 
-#chart-div {
+#bar-chart-div {
   margin: 2.5%;
   width: 90%;
   height: 40%;
@@ -88,18 +91,12 @@ img {
   border: 2px silver groove;
   padding: 2%;
 }
-/*
-.animation-box{
-  width: 400px;
-  height: 400px;
-  background: green;
-  transition: background 1.0s linear, border-radius 5s ease-in, width 2s ease-in-out;
 
+#pie-chart-div {
+  margin: 2.5%;
+  width: 90%;
+  height: 40%;
+  min-width: 500px;
+  border: 2px silver groove;
+  padding: 5%;
 }
-
-.animation-box:hover{
-  width: 1000px;
-  background: red;
-  border-radius: 50%;
-}
-*/
